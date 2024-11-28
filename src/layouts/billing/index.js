@@ -31,9 +31,6 @@ import Footer from "examples/Footer";
 
 // Billing page components
 import PaymentMethod from "layouts/billing/components/PaymentMethod";
-import Invoices from "layouts/billing/components/Invoices";
-import BillingInformation from "layouts/billing/components/BillingInformation";
-import Transactions from "layouts/billing/components/Transactions";
 import CreditBalance from "./components/CreditBalance";
 
 function Billing() {
@@ -56,19 +53,13 @@ function Billing() {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12} lg={5} xl={4}>
-              <Invoices />
-            </Grid>
+        
           </Grid>
         </VuiBox>
         <VuiBox my={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={7}>
-              <BillingInformation />
-            </Grid>
-            <Grid item xs={12} md={5}>
-              <Transactions />
-            </Grid>
+          <Grid container spacing={3}>   
+          
+          
           </Grid>
         </VuiBox>
       </VuiBox>
