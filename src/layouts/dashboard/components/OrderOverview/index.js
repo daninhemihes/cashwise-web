@@ -43,17 +43,16 @@ function OrdersOverview() {
     <Card className="h-100">
       <VuiBox mb="16px">
         <VuiTypography variant="lg" fontWeight="bold" mb="5px" color="white">
-          Orders overview
+          Ultimas Transações
         </VuiTypography>
         <VuiBox mb={2}>
           <VuiBox display="flex" alignItems="center">
             <BsCheckCircleFill color="green" size="15px" mr="5px" />
             <VuiTypography variant="button" color="text" fontWeight="medium" ml="5px" mr="2px">
-              +30%
+            
             </VuiTypography>{" "}
             <VuiTypography variant="button" color="text" fontWeight="regular">
               {" "}
-              this month
             </VuiTypography>
           </VuiBox>
         </VuiBox>
@@ -61,30 +60,23 @@ function OrdersOverview() {
       <VuiBox>
         <TimelineItem
           icon={<FaBell size="16px" color={palette.info.main} />}
-          title="$2400, Design changes"
-          dateTime="22 DEC 7:20 PM"
-        />
-        <TimelineItem
-          icon={<IoLogoCss3 size="16px" color={palette.error.main} />}
-          title="New order #1832412"
-          dateTime="21 DEC 11 PM"
+          title="R$2.400, Recebimento de salario"
+          dateTime="22 NOV 7:20"
         />
         <TimelineItem
           icon={<FaShoppingCart size="16px" color={palette.lightblue.main} />}
-          title="Server payments for April"
-          dateTime="21 DEC 9:34 PM"
-        />
+          title="Compras no Super Mercadp"
+          dateTime="21 NOV 21:34"        />
         <TimelineItem
           icon={<BsCreditCardFill size="16px" color={palette.warning.main} />}
-          title="New card added for order #4395133"
-          dateTime="20 DEC 2:20 AM"
+          title="Novo cartão adicionado"
+          dateTime="20 NOV 2:20"
         />
         <TimelineItem
           icon={<SiDropbox size="16px" color={palette.primary.focus} />}
-          title="New card added for order #4395133"
-          dateTime="18 DEC 4:54 AM"
+          title="Compra no cartão de crédito"
+          dateTime="18 NOV 16:54"
         />
-        <TimelineItem icon={<AdobeXD size="20px" />} title="New order #9583120" dateTime="17 DEC" />
       </VuiBox>
     </Card>
   );
