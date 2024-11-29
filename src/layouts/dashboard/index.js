@@ -62,6 +62,8 @@ import { lineChartDataDashboard } from "layouts/dashboard/data/lineChartData";
 import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptions";
 import { barChartDataDashboard } from "layouts/dashboard/data/barChartData";
 import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions";
+import Chart from 'react-apexcharts'; // Importando o ApexCharts
+
 
 function Dashboard() {
   const [totalBalance, setTotalBalance] = useState(0);
@@ -85,6 +87,28 @@ function Dashboard() {
 
       getData(); 
     }, []);
+    const pieChartData = {
+      series: [790, 500, 600, 3200], // Valores das despesas
+      options: {
+        chart: {
+          type: 'pie',
+        },
+        labels: ['Viagem', 'Educação', 'Compras', 'Despesas Fixas'], // Rótulos do gráfico
+        colors: ['#1E90FF', '#00BFFF', '#4682B4', '#5F9EA0'], // Várias tonalidades de azul
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+      }
+    };
+  
 
   const { gradients } = colors;
   const { cardContent } = gradients;
@@ -156,10 +180,11 @@ function Dashboard() {
                       borderRadius: "20px",
                     }}
                   >
-                    <BarChart
-                      barChartData={barChartDataDashboard}
-                      barChartOptions={barChartOptionsDashboard}
-                    />
+
+                  <Chart options={pieChartData.options} series={pieChartData.series} type="pie" height="220" /> {/* Ajustando o gráfico dentro do VuiBox */}
+
+
+
                   </VuiBox>
                   <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
                     Despesas por categoria                  
