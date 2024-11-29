@@ -86,7 +86,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "RTL",
+    name: "Adicionar Transação",
     key: "rtl",
     route: "/rtl",
     icon: <IoBuild size="15px" color="inherit" />,

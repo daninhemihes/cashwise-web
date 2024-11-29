@@ -41,6 +41,7 @@ import themeRTL from "assets/theme/theme-rtl";
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
+import TransactionModal from './components/TransactionModal'; // Importe o componente da modal
 
 // Vision UI Dashboard React routes
 import routes from "routes";
@@ -54,6 +55,8 @@ export default function App() {
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
+  const [openTransactionModal, setOpenTransactionModal] = useState(false); // Defina o estado corretamente
+
 
   // Cache for the rtl
   useMemo(() => {
@@ -71,6 +74,16 @@ export default function App() {
       setMiniSidenav(dispatch, false);
       setOnMouseEnter(true);
     }
+  };
+  // Função para abrir a modal de transação
+  const handleOpenTransactionModal = () => {
+    console.log("Abrindo a modal"); // Adicione este log
+    setOpenTransactionModal(true);
+  };
+
+  // Função para fechar a modal de transação
+  const handleCloseTransactionModal = () => {
+    setOpenTransactionModal(false); // Altera o estado para fechar a modal
   };
 
   // Close sidenav when mouse leave mini sidenav
@@ -124,15 +137,15 @@ export default function App() {
       zIndex={99}
       color="white"
       sx={{ cursor: "pointer" }}
-      onClick={handleConfiguratorOpen}
+      onClick={handleOpenTransactionModal} // Chama a função para abrir a modal
     >
       <Icon fontSize="default" color="inherit">
-        settings
+        add_circle
       </Icon>
     </VuiBox>
   );
 
-  return direction === "rtl" ? (
+  return direction === "teste" ? (
     <CacheProvider value={rtlCache}>
       <ThemeProvider theme={themeRTL}>
         <CssBaseline />
@@ -141,13 +154,15 @@ export default function App() {
             <Sidenav
               color={sidenavColor}
               brand=""
-              brandName="VISION UI FREE"
+              brandName="CashWise"
               routes={routes}
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
             />
             <Configurator />
             {configsButton}
+            <TransactionModal open={openTransactionModal} handleClose={handleCloseTransactionModal} />
+
           </>
         )}
         {layout === "vr" && <Configurator />}
@@ -165,7 +180,7 @@ export default function App() {
           <Sidenav
             color={sidenavColor}
             brand=""
-            brandName="VISION UI FREE"
+              brandName="CashWise"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}

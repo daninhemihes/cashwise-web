@@ -1,22 +1,6 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 import { useState } from "react";
+import { useHistory } from 'react-router-dom';
+import { login } from "services/apiService";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -41,9 +25,28 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgSignIn from "assets/images/signInImage.png";
 
 function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(true);
+  const [error, setError] = useState(null);
+  const history = useHistory();
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    console.log('teste');
+    setError(null);
+
+    try {
+      const response = await login({ username: email, password });
+
+      localStorage.setItem("token", response.access);
+      history.push("/dashboard");
+    } catch (err) {
+      setError("Invalid email or password");
+    }
+  };
 
   return (
     <CoverLayout
@@ -54,7 +57,7 @@ function SignIn() {
       motto="THE VISION UI DASHBOARD"
       image={bgSignIn}
     >
-      <VuiBox component="form" role="form">
+      <VuiBox component="form" role="form" onSubmit={handleLogin}>
         <VuiBox mb={2}>
           <VuiBox mb={1} ml={0.5}>
             <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
@@ -71,7 +74,13 @@ function SignIn() {
               palette.gradients.borderLight.angle
             )}
           >
-            <VuiInput type="email" placeholder="Your email..." fontWeight="500" />
+            <VuiInput
+              type="username"
+              placeholder="Your username..."
+              fontWeight="500"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </GradientBorder>
         </VuiBox>
         <VuiBox mb={2}>
@@ -96,9 +105,16 @@ function SignIn() {
               sx={({ typography: { size } }) => ({
                 fontSize: size.sm,
               })}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </GradientBorder>
         </VuiBox>
+        {error && (
+          <VuiTypography color="error" fontWeight="medium" variant="caption">
+            {error}
+          </VuiTypography>
+        )}
         <VuiBox display="flex" alignItems="center">
           <VuiSwitch color="info" checked={rememberMe} onChange={handleSetRememberMe} />
           <VuiTypography
@@ -112,7 +128,7 @@ function SignIn() {
           </VuiTypography>
         </VuiBox>
         <VuiBox mt={4} mb={1}>
-          <VuiButton color="info" fullWidth>
+          <VuiButton color="info" fullWidth type="submit">
             SIGN IN
           </VuiButton>
         </VuiBox>
